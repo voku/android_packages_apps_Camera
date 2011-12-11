@@ -1765,7 +1765,7 @@ public class Camera extends BaseCamera {
         String jpegQuality = mPreferences.getString(
                 CameraSettings.KEY_JPEG_QUALITY,
                 getString(R.string.pref_camera_jpegquality_default));
-        mParameters.setJpegQuality(JpegEncodingQualityMappings.getQualityNumber(mCameraId, jpegQuality));
+        mParameters.setJpegQuality(JpegEncodingQualityMappings.getQualityNumber(jpegQuality));
 
 
 
@@ -2283,12 +2283,12 @@ class JpegEncodingQualityMappings {
 
     // Retrieve and return the Jpeg encoding quality number
     // for the given quality level.
-    public static int getQualityNumber(int mCameraId, String jpegQuality) {
+    public static int getQualityNumber(String jpegQuality) {
         Integer quality = mHashMap.get(jpegQuality);
         if (quality == null) {
             Log.w(TAG, "Unknown Jpeg quality: " + jpegQuality);
             return DEFAULT_QUALITY;
         }
-        return CameraProfile.getJpegEncodingQualityParameter(mCameraId, quality.intValue());
+        return CameraProfile.getJpegEncodingQualityParameter(quality.intValue());
     }
 }
